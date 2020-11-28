@@ -16,9 +16,9 @@ Protein:
 
 
 ## Tech Stack 
-Django REST
-React 
-PostgreSQL
+- Django REST
+- React 
+- PostgreSQL
 
 ## Approach 
 

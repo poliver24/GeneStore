@@ -25,7 +25,7 @@ function App() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to={"/genes/add"} className="nav-link">
+            <Link to={"/genes/create"} className="nav-link">
               Add Gene
             </Link>
           </li>
@@ -35,7 +35,7 @@ function App() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to={"/proteins/add"} className="nav-link">
+            <Link to={"/proteins/create"} className="nav-link">
               Add Protein
             </Link>
           </li>

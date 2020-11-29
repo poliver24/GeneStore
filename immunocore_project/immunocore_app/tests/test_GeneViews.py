@@ -80,3 +80,36 @@ class CreateNewProteinTest(TestCase):
             content_type='application/json'
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateSingleGeneTest(TestCase):
+    """ Test module for updating an existing gene record """
+
+    def setUp(self):
+        self.TP53 = Gene.objects.create(
+            name='TP53', sequence='CCAG')
+        self.TNF = Gene.objects.create(
+            name='TNF', sequence='CTGA')
+        self.valid_payload = {
+            'name': 'EGFR',
+            'sequence': 'CCGG',
+        }
+        self.invalid_payload = {
+            'name': '',
+            'sequence': 'TTGA',
+        }
+
+    def test_valid_update_gene(self):
+        response = client.put(
+            reverse('get_delete_update_gene', kwargs={'pk': self.TP53.pk}),
+            data=json.dumps(self.valid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_invalid_update_gene(self):
+        response = client.put(
+            reverse('get_delete_update_gene', kwargs={'pk': self.TP53.pk}),
+            data=json.dumps(self.invalid_payload),
+            content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

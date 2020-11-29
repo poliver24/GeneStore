@@ -100,3 +100,44 @@ class CreateNewProteinTest(TestCase):
             content_type='application/json'
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateSingleProteinTest(TestCase):
+    """ Test module for updating an existing protein record """
+
+    def setUp(self):
+        Gene.objects.create(
+            name='TP53', sequence='CCAG')
+
+        gene_TP53 = Gene.objects.get(name='TP53')
+
+
+        self.isoform_5 = Protein.objects.create(
+            gene=gene_TP53, name='isoform_5', sequence='MDLVLK')
+        self.isoform_2 = Protein.objects.create(
+            gene=gene_TP53, name='isoform_2', sequence='PGQEA')
+        self.valid_payload = {
+            'gene': gene_TP53.pk,
+            'name': 'isoform_2',
+            'sequence': 'PGQEA',
+        }
+        self.invalid_payload = {
+            'gene': '',
+            'name': 'isoforn_5',
+            'sequence': 'MDLVLK',
+        }
+
+    def test_valid_update_protein(self):
+        response = client.put(
+            reverse('get_delete_update_protein', kwargs={'pk': self.isoform_5.pk}),
+            data=json.dumps(self.valid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_invalid_update_protein(self):
+        response = client.put(
+            reverse('get_delete_update_protein', kwargs={'pk': self.isoform_5.pk}),
+            data=json.dumps(self.invalid_payload),
+            content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

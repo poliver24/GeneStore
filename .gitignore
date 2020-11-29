@@ -1,2 +1,2 @@
-env
-immunocore_project/.env
+server/env
+server/.env

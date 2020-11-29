@@ -141,3 +141,29 @@ class UpdateSingleProteinTest(TestCase):
             data=json.dumps(self.invalid_payload),
             content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteSingleProteinTest(TestCase):
+    """ Test module for deleting an existing protein record """
+
+    def setUp(self):
+        Gene.objects.create(
+            name='TP53', sequence='CCAG')
+
+        gene_TP53 = Gene.objects.get(name='TP53')
+
+
+        self.isoform_5 = Protein.objects.create(
+            gene=gene_TP53, name='isoform_5', sequence='MDLVLK')
+        self.isoform_2 = Protein.objects.create(
+            gene=gene_TP53, name='isoform_2', sequence='PGQEA')
+
+    def test_valid_delete_protein(self):
+        response = client.delete(
+            reverse('get_delete_update_protein', kwargs={'pk': self.isoform_2.pk}))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_invalid_delete_protein(self):
+        response = client.delete(
+            reverse('get_delete_update_protein', kwargs={'pk': 30}))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

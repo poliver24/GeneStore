@@ -14,7 +14,8 @@ def get_delete_update_protein(request, pk):
 
     # get details of a single protein
     if request.method == 'GET':
-        return Response({})
+        serializer = ProteinSerializer(protein)
+        return Response(serializer.data)
     # delete a single protein
     elif request.method == 'DELETE':
         return Response({})

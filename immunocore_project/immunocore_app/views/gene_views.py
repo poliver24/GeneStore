@@ -27,7 +27,9 @@ def get_delete_update_gene(request, pk):
 def get_post_genes(request):
     # get all genes
     if request.method == 'GET':
-        return Response({})
+        genes = Gene.objects.all()
+        serializer = GeneSerializer(genes, many=True)
+        return Response(serializer.data)
     # insert a new record for a gene
     elif request.method == 'POST':
         return Response({})

@@ -18,7 +18,9 @@ def get_delete_update_gene(request, pk):
         return Response(serializer.data)
     # delete a single gene
     elif request.method == 'DELETE':
-        return Response({})
+        gene.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+       
     # update details of a single gene
     elif request.method == 'PUT':
         serializer = GeneSerializer(gene, data=request.data)

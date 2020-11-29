@@ -113,3 +113,23 @@ class UpdateSingleGeneTest(TestCase):
             data=json.dumps(self.invalid_payload),
             content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteSingleGeneTest(TestCase):
+    """ Test module for deleting an existing gene record """
+
+    def setUp(self):
+        self.TP53 = Gene.objects.create(
+            name='TP53', sequence='CCAG')
+        self.TNF = Gene.objects.create(
+            name='TNF', sequence='CTGA')
+
+    def test_valid_delete_gene(self):
+        response = client.delete(
+            reverse('get_delete_update_gene', kwargs={'pk': self.TNF.pk}))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_invalid_delete_gene(self):
+        response = client.delete(
+            reverse('get_delete_update_gene', kwargs={'pk': 30}))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

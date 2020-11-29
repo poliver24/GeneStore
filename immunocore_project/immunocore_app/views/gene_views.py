@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Gene
-from .serializers import GeneSerializer
+from ..models import Gene
+from ..serializers import GeneSerializer
 
 
 @api_view(['GET', 'DELETE', 'PUT'])

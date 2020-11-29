@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Protein
-from .serializers import ProteinSerializer
+from ..models import Protein
+from ..serializers import ProteinSerializer
 
 
 @api_view(['GET', 'DELETE', 'PUT'])

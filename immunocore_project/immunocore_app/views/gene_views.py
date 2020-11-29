@@ -33,4 +33,12 @@ def get_post_genes(request):
         return Response(serializer.data)
     # insert a new record for a gene
     elif request.method == 'POST':
-        return Response({})
+        data = {
+            'name': request.data.get('name'),
+            'sequence': request.data.get('sequence')
+        }
+        serializer = GeneSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

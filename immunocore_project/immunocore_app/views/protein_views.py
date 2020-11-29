@@ -33,4 +33,13 @@ def get_post_proteins(request):
         return Response(serializer.data)
     # insert a new record for a protein
     elif request.method == 'POST':
-        return Response({})
+        data = {
+            'gene': request.data.get('gene'),
+            'name': request.data.get('name'),
+            'sequence': request.data.get('sequence')
+        }
+        serializer = ProteinSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

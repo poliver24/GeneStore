@@ -33,7 +33,7 @@ class GetAllGenesTest(TestCase):
 
 
 class GetSingleGeneTest(TestCase):
-    """ Test module for GET single Protein API """
+    """ Test module for GET single Gene API """
 
     def setUp(self):
         self.TP53 = Gene.objects.create(name='TP53', sequence='CCAG')
@@ -51,3 +51,32 @@ class GetSingleGeneTest(TestCase):
         response = client.get(
             reverse('get_delete_update_gene', kwargs={'pk': 30}))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+class CreateNewProteinTest(TestCase):
+    """ Test module for inserting a new gene`S """
+
+    def setUp(self):
+        self.valid_payload = {
+            'name': 'TP53',
+            'sequence': 'CCAG',
+        }
+        self.invalid_payload = {
+            'name': '',
+            'sequence': 'CTGA' 
+        }
+
+    def test_create_valid_gene(self):
+        response = client.post(
+            reverse('get_post_genes'),
+            data=json.dumps(self.valid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_invalid_gene(self):
+        response = client.post(
+            reverse('get_post_genes'),
+            data=json.dumps(self.invalid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

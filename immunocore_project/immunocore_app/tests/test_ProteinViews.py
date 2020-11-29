@@ -63,3 +63,40 @@ class GetSingleProteinTest(TestCase):
         response = client.get(
             reverse('get_delete_update_protein', kwargs={'pk': 30}))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+class CreateNewProteinTest(TestCase):
+    """ Test module for inserting a new protein """
+
+    def setUp(self):
+        Gene.objects.create(
+            name='TP53', sequence='CCAG')
+
+        gene_TP53 = Gene.objects.get(name='TP53')
+
+
+        self.valid_payload = {
+            'gene': gene_TP53.pk,
+            'name': 'isoform 5',
+            'sequence': 'MDLVLK',
+        }
+        self.invalid_payload = {
+            'geme': '',
+            'name': 'isoform 2',
+            'sequence': 'PGQEA' 
+        }
+
+    def test_create_valid_protein(self):
+        response = client.post(
+            reverse('get_post_proteins'),
+            data=json.dumps(self.valid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_invalid_protein(self):
+        response = client.post(
+            reverse('get_post_proteins'),
+            data=json.dumps(self.invalid_payload),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

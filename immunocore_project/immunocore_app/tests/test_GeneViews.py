@@ -30,3 +30,24 @@ class GetAllGenesTest(TestCase):
         serializer = GeneSerializer(genes, many=True)
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class GetSingleGeneTest(TestCase):
+    """ Test module for GET single Protein API """
+
+    def setUp(self):
+        self.TP53 = Gene.objects.create(name='TP53', sequence='CCAG')
+        self.TNF = Gene.objects.create(name='TNF', sequence='CTGA')
+
+    def test_get_valid_single_gene(self):
+        response = client.get(
+            reverse('get_delete_update_gene', kwargs={'pk': self.TNF.pk}))
+        gene = Gene.objects.get(pk=self.TNF.pk)
+        serializer = GeneSerializer(gene)
+        self.assertEqual(response.data, serializer.data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_invalid_single_gene(self):
+        response = client.get(
+            reverse('get_delete_update_gene', kwargs={'pk': 30}))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

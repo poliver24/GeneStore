@@ -10,4 +10,4 @@ class GeneSerializer(serializers.ModelSerializer):
 class ProteinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Protein
-        fields = ('id', 'gene', 'name', 'sequence')
+        fields = ('id', 'name', 'sequence', 'gene')

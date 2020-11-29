@@ -5,9 +5,9 @@ from .models import Gene, Protein
 class GeneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Gene
-        fields = ('name', 'sequence')
+        fields = ('id','name', 'sequence')
 
 class ProteinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Protein
-        fields = ('gene', 'name', 'sequence')
+        fields = ('id', 'gene', 'name', 'sequence')

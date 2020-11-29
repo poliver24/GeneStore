@@ -14,20 +14,37 @@ def get_delete_update_gene(request, pk):
 
     # get details of a single gene
     if request.method == 'GET':
-        return Response({})
+        serializer = GeneSerializer(gene)
+        return Response(serializer.data)
     # delete a single gene
     elif request.method == 'DELETE':
-        return Response({})
+        gene.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+       
     # update details of a single gene
     elif request.method == 'PUT':
-        return Response({})
+        serializer = GeneSerializer(gene, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'POST'])
 def get_post_genes(request):
     # get all genes
     if request.method == 'GET':
-        return Response({})
+        genes = Gene.objects.all()
+        serializer = GeneSerializer(genes, many=True)
+        return Response(serializer.data)
     # insert a new record for a gene
     elif request.method == 'POST':
-        return Response({})
+        data = {
+            'name': request.data.get('name'),
+            'sequence': request.data.get('sequence')
+        }
+        serializer = GeneSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

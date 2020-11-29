@@ -18,6 +18,9 @@ class Gene(models.Model):
     def __repr__(self):
         return self.name + ' has been added.'
 
+    def __str__(self):
+        return self.name
+
 class Protein(models.Model):
     """
     Protein Model
@@ -33,3 +36,7 @@ class Protein(models.Model):
 
     def __repr__(self):
         return self.name + ' has been added.'
+
+    def __str__(self):
+        return self.name
+

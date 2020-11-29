@@ -27,7 +27,9 @@ def get_delete_update_protein(request, pk):
 def get_post_proteins(request):
     # get all proteins
     if request.method == 'GET':
-        return Response({})
+        proteins = Protein.objects.all()
+        serializer = ProteinSerializer(proteins, many=True)
+        return Response(serializer.data)
     # insert a new record for a protein
     elif request.method == 'POST':
         return Response({})

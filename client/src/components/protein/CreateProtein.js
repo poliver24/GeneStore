@@ -7,7 +7,7 @@ const CreateProtein = () => {
     id: null,
     name: "",
     sequence: "",
-    gene: null,
+    related_gene: null,
   };
   const [protein, setProtein] = useState(initialProteinState);
   const [submitted, setSubmitted] = useState(false);

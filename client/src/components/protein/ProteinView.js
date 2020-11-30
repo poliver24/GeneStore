@@ -7,7 +7,7 @@ const Protein = (props) => {
     id: null,
     name: "",
     sequence: "",
-    gene: null
+    related_gene: null
   };
   const [currentProtein, setCurrentProtein] = useState(initialProteinState);
   const [message, setMessage] = useState("");
@@ -15,7 +15,13 @@ const Protein = (props) => {
   const getProtein = (id) => {
     ProteinDataService.getProtein(id)
       .then((response) => {
-        setCurrentProtein(response.data);
+        let data = {
+          id: response.data.id,
+          name: response.data.name,
+          sequence: response.data.sequence,
+          related_gene: response.data.gene
+        }
+        setCurrentProtein(data);
         console.log(response.data);
       })
       .catch((e) => {

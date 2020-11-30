@@ -15,8 +15,8 @@ class Gene(models.Model):
     def get_sequence(self):
         return self.name + ' has sequence ' + self.sequence + '.'
 
-    def __repr__(self):
-        return self.name + ' has been added.'
+    # def __repr__(self):
+    #     return self.name + ' has been added.'
 
     def __str__(self):
         return self.name
@@ -27,7 +27,7 @@ class Protein(models.Model):
     Defines the attributes of a Protein
     """
 
-    gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
+    related_gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     sequence = models.CharField(max_length=10000)
 

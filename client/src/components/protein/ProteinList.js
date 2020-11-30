@@ -67,7 +67,9 @@ const ProteinsList = () => {
                 <label>
                   <strong>Gene:</strong>
                 </label>{" "}
-                {currentProtein.gene}
+                <a href={"api/genes/" + currentProtein.gene.id}>
+                  {currentProtein.gene.name}
+                </a>
               </div>
 
               <Link

@@ -7,7 +7,7 @@ class Gene(models.Model):
     Defines the attributes of a Gene
     """
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     sequence = models.CharField(max_length=10000)
 
 
@@ -27,9 +27,9 @@ class Protein(models.Model):
     Defines the attributes of a Protein
     """
 
+    name = models.CharField(max_length=255, unique=True)
+    sequence = models.CharField(max_length=10000, unique=True)
     related_gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    sequence = models.CharField(max_length=10000)
 
     def get_sequence(self):
         return self.name + ' has sequence ' + self.sequence + '.'

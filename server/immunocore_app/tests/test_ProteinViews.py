@@ -76,13 +76,38 @@ class CreateNewProteinTest(TestCase):
 
         self.valid_payload = {
             'gene': gene_TP53.name,
-            'name': 'isoform 5',
+            'name': 'isoform 1',
             'sequence': 'MDLVLK',
         }
-        self.invalid_payload = {
+        self.empty_gene = {
             'related_gene': '',
             'name': 'isoform 2',
-            'sequence': 'PGQEA' 
+            'sequence': 'AABB' 
+        }
+        self.empty_name = {
+            'related_gene': gene_TP53.name,
+            'name': '',
+            'sequence': 'BBCC' 
+        }
+        self.empty_sequence = {
+            'related_gene': gene_TP53.name,
+            'name': 'isoform 3',
+            'sequence': '' 
+        }
+        self.duplicate_name = {
+            'related_gene': gene_TP53.name,
+            'name': 'isoform 1',
+            'sequence': 'CCDD' 
+        }
+        self.duplicate_sequence = {
+            'related_gene': gene_TP53.name,
+            'name': 'isoform 5',
+            'sequence': 'MDLVLK' 
+        }
+        self.invalid_sequence = {
+            'gene': gene_TP53.name,
+            'name': 'isoform 6',
+            'sequence': 'MD4@',
         }
 
     def test_create_valid_protein(self):
@@ -93,13 +118,54 @@ class CreateNewProteinTest(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_create_invalid_protein(self):
+    def test_create_protein_empty_gene(self):
         response = client.post(
             reverse('get_post_proteins'),
-            data=json.dumps(self.invalid_payload),
+            data=json.dumps(self.empty_gene),
             content_type='application/json'
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_protein_empty_name(self):
+        response = client.post(
+            reverse('get_post_proteins'),
+            data=json.dumps(self.empty_name),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+    
+    def test_create_protein_empty_sequence(self):
+        response = client.post(
+            reverse('get_post_proteins'),
+            data=json.dumps(self.empty_sequence),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_protein_duplicate_name(self):
+        response = client.post(
+            reverse('get_post_proteins'),
+            data=json.dumps(self.duplicate_name),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_protein_duplicate_sequence(self):
+        response = client.post(
+            reverse('get_post_proteins'),
+            data=json.dumps(self.duplicate_sequence),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_protein_invalid_sequence(self):
+        response = client.post(
+            reverse('get_post_proteins'),
+            data=json.dumps(self.invalid_sequence),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
 
 
 class UpdateSingleProteinTest(TestCase):

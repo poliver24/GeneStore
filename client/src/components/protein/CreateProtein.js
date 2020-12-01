@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import ProteinDataService from "../../services/ProteinService";
 
+import { useForm } from "react-hook-form";
+
+const styles = {}
+
 const CreateProtein = () => {
   const initialProteinState = {
     id: null,
@@ -11,6 +15,8 @@ const CreateProtein = () => {
   };
   const [protein, setProtein] = useState(initialProteinState);
   const [submitted, setSubmitted] = useState(false);
+
+  const { register, handleSubmit, errors } = useForm(); 
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -45,6 +51,10 @@ const CreateProtein = () => {
     setSubmitted(false);
   };
 
+  function onSubmit(){
+    saveProtein();
+  }
+
   return (
     <div className="submit-form">
       {submitted ? (
@@ -55,7 +65,7 @@ const CreateProtein = () => {
           </button>
         </div>
       ) : (
-        <div>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -66,6 +76,13 @@ const CreateProtein = () => {
               value={protein.name}
               onChange={handleInputChange}
               name="name"
+              ref={register({
+                required: true,
+              })}
+              style={{
+                ...styles.input,
+                borderColor: errors.name && "red",
+              }}
             />
           </div>
 
@@ -79,7 +96,16 @@ const CreateProtein = () => {
               value={protein.sequence}
               onChange={handleInputChange}
               name="sequence"
+              ref={register({
+                required: true,
+                pattern: /[A-Z]/,
+              })}
+              style={{
+                ...styles.input,
+                borderColor: errors.sequence && "red",
+              }}
             />
+            {errors.sequence && "Sequence can only contain letters"}
           </div>
 
           <div className="form-group">
@@ -92,13 +118,16 @@ const CreateProtein = () => {
               value={protein.gene}
               onChange={handleInputChange}
               name="gene"
+              ref={register({
+                required: true,
+              })}
             />
           </div>
 
-          <button onClick={saveProtein} className="btn btn-success">
+          <button type="submit" className="btn btn-success">
             Submit
           </button>
-        </div>
+        </form>
       )}
     </div>
   );

@@ -4,9 +4,6 @@ import GeneDataService from '../../services/GeneService';
 
 import { useForm } from "react-hook-form";
 
-const styles = {}
-
-
 const CreateGene = () => {
     const initialGeneState = {
         id: null,
@@ -15,8 +12,6 @@ const CreateGene = () => {
     };
     const [gene, setGene] = useState(initialGeneState);
     const [submitted, setSubmitted] = useState(false);
-
-    const { register, handleSubmit, errors } = useForm();
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -49,10 +44,6 @@ const CreateGene = () => {
         setSubmitted(false);
     };
 
-    function onSubmit(data) {
-      saveGene();
-    }
-
     return (
       <div className="submit-form">
         {submitted ? (
@@ -63,7 +54,7 @@ const CreateGene = () => {
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -74,13 +65,6 @@ const CreateGene = () => {
                 value={gene.name}
                 onChange={handleInputChange}
                 name="name"
-                ref={register({
-                  required: true,
-                })}
-                style={{
-                  ...styles.input,
-                  borderColor: errors.name && "red",
-                }}
               />
             </div>
 
@@ -94,22 +78,13 @@ const CreateGene = () => {
                 value={gene.sequence}
                 onChange={handleInputChange}
                 name="sequence"
-                ref={register({
-                  required: true,
-                  pattern: /[ATCG]/,
-                })}
-                style={{
-                  ...styles.input,
-                  borderColor: errors.sequence && "red",
-                }}
               />
-              {errors.sequence && "Sequence can only contain characters A,T,C and G"}
             </div>
 
-            <button type="submit" className="btn btn-success">
+            <button onClick={saveGene} className="btn btn-success">
               Submit
             </button>
-          </form>
+          </div>
         )}
       </div>
     );

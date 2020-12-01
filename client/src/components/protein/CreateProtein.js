@@ -15,6 +15,7 @@ const CreateProtein = () => {
   };
   const [protein, setProtein] = useState(initialProteinState);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const { register, handleSubmit, errors } = useForm(); 
 
@@ -29,7 +30,7 @@ const CreateProtein = () => {
       sequence: protein.sequence,
       gene: protein.gene,
     };
-
+    setError(false)
     ProteinDataService.createProtein(data)
       .then((response) => {
         setProtein({
@@ -43,6 +44,7 @@ const CreateProtein = () => {
       })
       .catch((e) => {
         console.log(e);
+        setError(true)
       });
   };
 
@@ -57,6 +59,7 @@ const CreateProtein = () => {
 
   return (
     <div className="submit-form">
+      {error && <div style={{ color: `red` }}>This Protein Already Exists</div>}
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>

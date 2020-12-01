@@ -1,6 +1,7 @@
 // Single Gene View
 import React, { useState, useEffect } from 'react';
 import GeneDataService from '../../services/GeneService';
+import { Link } from "react-router-dom";
 
 const Gene = props => {
     const initialGeneState = {
@@ -81,12 +82,9 @@ const Gene = props => {
                   onChange={handleInputChange}
                 />
               </div>
-
             </form>
 
-            <button
-              className="badge badge-danger mr-2"
-              onClick={deleteGene}>
+            <button className="badge badge-danger mr-2" onClick={deleteGene}>
               Delete
             </button>
 
@@ -104,6 +102,9 @@ const Gene = props => {
             <p>Please click on a Gene...</p>
           </div>
         )}
+        <Link to={"/genes/create"} className="nav-link">
+          Add Gene
+        </Link>
       </div>
     );
 }

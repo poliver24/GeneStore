@@ -11,6 +11,7 @@ import GeneList from './components/gene/GeneList';
 import CreateProtein from './components/protein/CreateProtein';
 import ProteinView from './components/protein/ProteinView';
 import ProteinList from './components/protein/ProteinList';
+import UpdateProtein from "./components/protein/UpdateProtein";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route exact path="/proteins" component={ProteinList} />
           <Route exact path="/proteins/create" component={CreateProtein} />
           <Route path="/proteins/:id" component={ProteinView} />
+          <Route exact path="/proteins/update/:id" component={UpdateProtein} />
         </Switch>
       </div>
     </div>

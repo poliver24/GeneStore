@@ -11,10 +11,11 @@ const CreateGene = () => {
     const initialGeneState = {
         id: null,
         name: "",
-        sequence: ""
+        sequence: "",
     };
     const [gene, setGene] = useState(initialGeneState);
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState("");
 
     const { register, handleSubmit, errors } = useForm();
 
@@ -52,6 +53,7 @@ const CreateGene = () => {
     function onSubmit() {
       saveGene();
     }
+
 
     return (
       <div className="submit-form">

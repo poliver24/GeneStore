@@ -13,7 +13,7 @@ class Gene(models.Model):
     """
 
     name = models.CharField(max_length=255, unique=True)
-    sequence = models.CharField(max_length=10000, validators=[gene_sequence])
+    sequence = models.CharField(max_length=10000, unique=True, validators=[gene_sequence])
 
 
     # Method added for basic model testing

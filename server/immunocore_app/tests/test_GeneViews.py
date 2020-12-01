@@ -52,7 +52,7 @@ class GetSingleGeneTest(TestCase):
             reverse('get_delete_update_gene', kwargs={'pk': 30}))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-class CreateNewProteinTest(TestCase):
+class CreateNewGeneTest(TestCase):
     """ Test module for inserting a new gene`S """
 
     def setUp(self):
@@ -60,9 +60,25 @@ class CreateNewProteinTest(TestCase):
             'name': 'TP53',
             'sequence': 'CCAG',
         }
-        self.invalid_payload = {
+        self.empty_name = {
             'name': '',
             'sequence': 'CTGA' 
+        }
+        self.empty_sequence = {
+            'name': 'TP55',
+            'sequence': '' 
+        }
+        self.duplicate_name = {
+            'name': 'TP53',
+            'sequence': 'CTGA' 
+        }
+        self.duplicate_sequence = {
+            'name': 'TP56',
+            'sequence': 'CCAG' 
+        }
+        self.invalid_sequence = {
+            'name': 'TP57',
+            'sequence': 'POPPIN' 
         }
 
     def test_create_valid_gene(self):
@@ -73,10 +89,52 @@ class CreateNewProteinTest(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    def test_create_invalid_gene(self):
+    def test_create_gene_empty_name(self):
         response = client.post(
             reverse('get_post_genes'),
-            data=json.dumps(self.invalid_payload),
+            data=json.dumps(self.empty_name),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_gene_empty_sequence(self):
+        response = client.post(
+            reverse('get_post_genes'),
+            data=json.dumps(self.empty_sequence),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+    
+    def test_create_gene_duplicate_name(self):
+        client.post(
+            reverse('get_post_genes'),
+            data=json.dumps(self.valid_payload),
+            content_type='application/json'
+        )
+        response = client.post(
+            reverse('get_post_genes'),
+            data=json.dumps(self.duplicate_name),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_gene_duplicate_sequence(self):
+        client.post(
+            reverse('get_post_genes'),
+            data=json.dumps(self.valid_payload),
+            content_type='application/json'
+        )
+        response = client.post(
+            reverse('get_post_genes'),
+            data=json.dumps(self.duplicate_sequence),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+    
+    def test_create_gene_invalid_sequence(self):
+        response = client.post(
+            reverse('get_post_genes'),
+            data=json.dumps(self.invalid_sequence),
             content_type='application/json'
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

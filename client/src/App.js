@@ -4,8 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
 import Home from './components/home';
+import GeneView from "./components/gene/GeneView";
 import CreateGene from './components/gene/CreateGene';
-import GeneView from './components/gene/GeneView';
+import UpdateGene from './components/gene/UpdateGene';
 import GeneList from './components/gene/GeneList';
 import CreateProtein from './components/protein/CreateProtein';
 import ProteinView from './components/protein/ProteinView';
@@ -37,7 +38,8 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/genes" component={GeneList} />
           <Route exact path="/genes/create" component={CreateGene} />
-          <Route path="/genes/:id" component={GeneView} />
+          <Route exact path="/genes/:id" component={GeneView} />
+          <Route exact path="/genes/update/:id" component={UpdateGene} />
           <Route exact path="/proteins" component={ProteinList} />
           <Route exact path="/proteins/create" component={CreateProtein} />
           <Route path="/proteins/:id" component={ProteinView} />

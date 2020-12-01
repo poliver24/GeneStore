@@ -5,6 +5,10 @@ const getProteins = () => {
   return http.get("/proteins/");
 };
 
+const getAssociatedProteins = id => {
+  return http.get(`/proteins/?search=${id}`);
+}
+
 const getProtein = id => {
   return http.get(`/proteins/${id}/`);
 };
@@ -27,4 +31,5 @@ export default {
   createProtein,
   updateProtein,
   deleteProtein,
+  getAssociatedProteins
 };

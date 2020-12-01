@@ -59,12 +59,6 @@ const ProteinsList = () => {
               </div>
               <div>
                 <label>
-                  <strong>Sequence:</strong>
-                </label>{" "}
-                {currentProtein.sequence}
-              </div>
-              <div>
-                <label>
                   <strong>Gene:</strong>
                 </label>{" "}
                 <a href={"/genes/" + currentProtein.related_gene.id}>

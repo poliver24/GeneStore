@@ -10,9 +10,6 @@ const home = () => {
               <a className="btn btn-dark start start-two" href="#">
                 Genes
               </a>
-              <a className="btn btn-dark start start-two" href="#">
-                Proteins
-              </a>
             </h6>
           </div>
           <div className="col-sm-9 showcase-img">

@@ -58,17 +58,11 @@ const GenesList = () => {
                 </label>{" "}
                 {currentGene.name}
               </div>
-              <div>
-                <label>
-                  <strong>Sequence:</strong>
-                </label>{" "}
-                {currentGene.sequence}
-              </div>
 
               <Link
                 to={"/genes/" + currentGene.id}
-                className="badge badge-warning">
-                Edit
+                className="badge badge-success">
+                View
               </Link>
             </div>
           ) : (

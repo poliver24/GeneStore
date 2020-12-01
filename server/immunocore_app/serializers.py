@@ -19,14 +19,12 @@ class ProteinSerializer(serializers.ModelSerializer):
         return GeneSerializer(obj.related_gene).data
 
     def create(self, validated_data):
-        print(validated_data)
         gene_name = validated_data.pop('gene')
         gene = Gene.objects.get(name=gene_name)
         protein = Protein.objects.create(related_gene=gene, **validated_data)
         return protein
 
     def update(self, instance, validated_data):
-        print(validated_data)
         gene_name = validated_data.pop('gene')
         gene = Gene.objects.get(name=gene_name)
         instance.name = validated_data.get('name', instance.name)

@@ -23,9 +23,9 @@ class GetAllProteinsTest(TestCase):
         gene_TNF = Gene.objects.get(name='TNF')
 
         Protein.objects.create(
-            gene=gene_TP53, name='isoform 5', sequence='MDLVLK')
+            related_gene=gene_TP53, name='isoform 5', sequence='MDLVLK')
         Protein.objects.create(
-            gene=gene_TNF, name='isoform 2', sequence='PGQEA')
+            related_gene=gene_TNF, name='isoform 2', sequence='PGQEA')
 
     def test_get_all_genes(self):
         # get API response
@@ -48,8 +48,8 @@ class GetSingleProteinTest(TestCase):
         gene_TP53 = Gene.objects.get(name='TP53')
         gene_TNF = Gene.objects.get(name='TNF')
 
-        self.isoform_5 = Protein.objects.create(gene=gene_TP53, name='isoform 5', sequence='MDLVLK')
-        self.isoform_2 = Protein.objects.create(gene=gene_TNF, name='isoform 2', sequence='PGQEA')
+        self.isoform_5 = Protein.objects.create(related_gene=gene_TP53, name='isoform 5', sequence='MDLVLK')
+        self.isoform_2 = Protein.objects.create(related_gene=gene_TNF, name='isoform 2', sequence='PGQEA')
 
     def test_get_valid_single_protein(self):
         response = client.get(
@@ -75,12 +75,12 @@ class CreateNewProteinTest(TestCase):
 
 
         self.valid_payload = {
-            'gene': gene_TP53.pk,
+            'gene': gene_TP53.name,
             'name': 'isoform 5',
             'sequence': 'MDLVLK',
         }
         self.invalid_payload = {
-            'geme': '',
+            'related_gene': '',
             'name': 'isoform 2',
             'sequence': 'PGQEA' 
         }
@@ -108,18 +108,21 @@ class UpdateSingleProteinTest(TestCase):
     def setUp(self):
         Gene.objects.create(
             name='TP53', sequence='CCAG')
+        Gene.objects.create(
+            name='TP66', sequence='CCGG')
 
         gene_TP53 = Gene.objects.get(name='TP53')
+        gene_TP66 = Gene.objects.get(name='TP66')
 
 
         self.isoform_5 = Protein.objects.create(
-            gene=gene_TP53, name='isoform_5', sequence='MDLVLK')
+            related_gene=gene_TP53, name='isoform_5', sequence='MDLVLK')
         self.isoform_2 = Protein.objects.create(
-            gene=gene_TP53, name='isoform_2', sequence='PGQEA')
+            related_gene=gene_TP53, name='isoform_2', sequence='PGQEA')
         self.valid_payload = {
-            'gene': gene_TP53.pk,
-            'name': 'isoform_2',
-            'sequence': 'PGQEA',
+            'gene': gene_TP66.name,
+            'name': 'isoform_4',
+            'sequence': 'ATAT',
         }
         self.invalid_payload = {
             'gene': '',
@@ -133,7 +136,7 @@ class UpdateSingleProteinTest(TestCase):
             data=json.dumps(self.valid_payload),
             content_type='application/json'
         )
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_invalid_update_protein(self):
         response = client.put(
@@ -154,9 +157,9 @@ class DeleteSingleProteinTest(TestCase):
 
 
         self.isoform_5 = Protein.objects.create(
-            gene=gene_TP53, name='isoform_5', sequence='MDLVLK')
+            related_gene=gene_TP53, name='isoform_5', sequence='MDLVLK')
         self.isoform_2 = Protein.objects.create(
-            gene=gene_TP53, name='isoform_2', sequence='PGQEA')
+            related_gene=gene_TP53, name='isoform_2', sequence='PGQEA')
 
     def test_valid_delete_protein(self):
         response = client.delete(

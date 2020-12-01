@@ -2,14 +2,22 @@
 import React, { useState } from 'react';
 import GeneDataService from '../../services/GeneService';
 
+import { useForm } from "react-hook-form";
+
+const styles = {}
+
+
 const CreateGene = () => {
     const initialGeneState = {
         id: null,
         name: "",
-        sequence: ""
+        sequence: "",
     };
     const [gene, setGene] = useState(initialGeneState);
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+
+    const { register, handleSubmit, errors } = useForm();
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -21,7 +29,7 @@ const CreateGene = () => {
             name: gene.name,
             sequence: gene.sequence
         };
-
+        setError(false)
         GeneDataService.createGene(data)
             .then(response => {
                 setGene({
@@ -33,7 +41,8 @@ const CreateGene = () => {
                 console.log(response.data);
             })
             .catch(e => {
-                console.log(e)
+                console.log(e.response.data)
+                setError(true)
             });
     };
 
@@ -42,8 +51,18 @@ const CreateGene = () => {
         setSubmitted(false);
     };
 
+    function onSubmit() {
+      saveGene();
+    }
+
+
     return (
       <div className="submit-form">
+        {error && (
+          <div style={{ color: `red` }}>
+            This Gene Already Exists
+          </div>
+        )}
         {submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
@@ -52,7 +71,7 @@ const CreateGene = () => {
             </button>
           </div>
         ) : (
-          <div>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -63,6 +82,13 @@ const CreateGene = () => {
                 value={gene.name}
                 onChange={handleInputChange}
                 name="name"
+                ref={register({
+                  required: true,
+                })}
+                style={{
+                  ...styles.input,
+                  borderColor: errors.name && "red",
+                }}
               />
             </div>
 
@@ -76,13 +102,23 @@ const CreateGene = () => {
                 value={gene.sequence}
                 onChange={handleInputChange}
                 name="sequence"
+                ref={register({
+                  required: true,
+                  pattern: /[ATCG]/,
+                })}
+                style={{
+                  ...styles.input,
+                  borderColor: errors.sequence && "red",
+                }}
               />
+              {errors.sequence &&
+                "Sequence can only contain characters A,T,C and G"}
             </div>
 
-            <button onClick={saveGene} className="btn btn-success">
+            <button type="submit" className="btn btn-success">
               Submit
             </button>
-          </div>
+          </form>
         )}
       </div>
     );

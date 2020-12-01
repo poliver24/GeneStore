@@ -1,4 +1,9 @@
 from django.db import models
+from django.core.validators import RegexValidator
+
+gene_sequence = RegexValidator(r'^[ATCG]*$', 'Gene sequence can only contain characters A, T, C, or G')
+
+protein_sequence = RegexValidator(r'^[A-Z]*$' 'Protein sequence can only contain letters A-Z')
 
 # Create your models here.
 class Gene(models.Model):
@@ -7,8 +12,8 @@ class Gene(models.Model):
     Defines the attributes of a Gene
     """
 
-    name = models.CharField(max_length=255)
-    sequence = models.CharField(max_length=10000)
+    name = models.CharField(max_length=255, unique=True)
+    sequence = models.CharField(max_length=10000, validators=[gene_sequence])
 
 
     # Method added for basic model testing
@@ -27,9 +32,9 @@ class Protein(models.Model):
     Defines the attributes of a Protein
     """
 
+    name = models.CharField(max_length=255, unique=True)
+    sequence = models.CharField(max_length=10000, unique=True, validators=[protein_sequence])
     related_gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    sequence = models.CharField(max_length=10000)
 
     def get_sequence(self):
         return self.name + ' has sequence ' + self.sequence + '.'

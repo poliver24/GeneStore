@@ -1,6 +1,7 @@
 // Single Protein View
 import React, { useState, useEffect } from "react";
 import ProteinDataService from "../../services/ProteinService";
+import { Link } from "react-router-dom";
 
 const Protein = (props) => {
   const initialProteinState = {
@@ -119,6 +120,9 @@ const Protein = (props) => {
           <p>Please click on a Protein...</p>
         </div>
       )}
+      <Link to={"/genes/create"} className="nav-link">
+        Add Gene
+      </Link>
     </div>
   );
 };

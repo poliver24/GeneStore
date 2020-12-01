@@ -15,8 +15,8 @@ function App() {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <a href="/genes" className="navbar-brand">
-          immunocore
+        <a href="/" className="navbar-brand">
+          dnaDB
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
@@ -25,18 +25,8 @@ function App() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to={"/genes/create"} className="nav-link">
-              Add Gene
-            </Link>
-          </li>
-          <li className="nav-item">
             <Link to={"/proteins"} className="nav-link">
               Proteins
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/proteins/create"} className="nav-link">
-              Add Protein
             </Link>
           </li>
         </div>
@@ -44,7 +34,7 @@ function App() {
 
       <div className="container mt-3">
         <Switch>
-          {/* <Route exact path="/" component={Home} /> */}
+          <Route exact path="/" component={Home} />
           <Route exact path="/genes" component={GeneList} />
           <Route exact path="/genes/create" component={CreateGene} />
           <Route path="/genes/:id" component={GeneView} />

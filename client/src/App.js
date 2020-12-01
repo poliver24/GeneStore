@@ -18,7 +18,7 @@ function App() {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <a href="/" className="navbar-brand">
-          dnaDB
+          GeneStore
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
@@ -43,7 +43,7 @@ function App() {
           <Route exact path="/genes/update/:id" component={UpdateGene} />
           <Route exact path="/proteins" component={ProteinList} />
           <Route exact path="/proteins/create" component={CreateProtein} />
-          <Route path="/proteins/:id" component={ProteinView} />
+          <Route exact path="/proteins/:id" component={ProteinView} />
           <Route exact path="/proteins/update/:id" component={UpdateProtein} />
         </Switch>
       </div>

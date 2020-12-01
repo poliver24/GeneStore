@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import ProteinDataService from "../../services/ProteinService";
 import { Link } from "react-router-dom";
 
-const Protein = (props) => {
+const ProteinView = (props) => {
   const initialProteinState = {
     id: null,
     name: "",
@@ -68,4 +68,4 @@ const Protein = (props) => {
   );
 };
 
-export default Protein;
+export default ProteinView;

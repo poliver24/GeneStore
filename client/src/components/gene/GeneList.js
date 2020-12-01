@@ -31,7 +31,6 @@ const GenesList = () => {
       <div className="list row">
         <div className="col-md-6">
           <h4>Genes List</h4>
-
           <ul className="list-group">
             {genes &&
               genes.map((gene, index) => (
@@ -46,7 +45,9 @@ const GenesList = () => {
                 </li>
               ))}
           </ul>
-
+          <Link to={"/genes/create"} className="badge badge-success">
+            Add new Gene
+          </Link>
         </div>
         <div className="col-md-6">
           {currentGene ? (

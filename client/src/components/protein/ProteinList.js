@@ -68,8 +68,8 @@ const ProteinsList = () => {
 
               <Link
                 to={"/proteins/" + currentProtein.id}
-                className="badge badge-warning">
-                Edit
+                className="badge badge-success">
+                View
               </Link>
             </div>
           ) : (

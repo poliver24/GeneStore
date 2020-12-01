@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import GeneDataService from '../../services/GeneService';
 import { Link } from "react-router-dom";
 
-const Gene = props => {
+const UpdateGene = props => {
     const initialGeneState = {
         id: null,
         name: "",
@@ -106,4 +106,4 @@ const Gene = props => {
     );
 }
 
-export default Gene
+export default UpdateGene

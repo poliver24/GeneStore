@@ -4,7 +4,7 @@ import GeneDataService from "../../services/GeneService";
 import ProteinDataService from "../../services/ProteinService";
 import { Link } from "react-router-dom";
 
-const Gene = (props) => {
+const GeneView = (props) => {
   const initialGeneState = {
     id: null,
     name: "",
@@ -89,4 +89,4 @@ const Gene = (props) => {
   );
 };
 
-export default Gene;
+export default GeneView;

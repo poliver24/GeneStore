@@ -3,7 +3,7 @@ from django.core.validators import RegexValidator
 
 gene_sequence = RegexValidator(r'^[ATCG]*$', 'Gene sequence can only contain characters A, T, C, or G')
 
-protein_sequence = RegexValidator(r'^[A-Z]*$' 'Protein sequence can only contain letters A-Z')
+protein_sequence = RegexValidator(r'^[A-Z]*$', 'Protein sequence can only contain letters A-Z')
 
 # Create your models here.
 class Gene(models.Model):

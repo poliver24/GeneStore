@@ -3,12 +3,12 @@ import React, { useState, useEffect } from "react";
 import ProteinDataService from "../../services/ProteinService";
 import { Link } from "react-router-dom";
 
-const Protein = (props) => {
+const ProteinView = (props) => {
   const initialProteinState = {
     id: null,
     name: "",
     sequence: "",
-    related_gene: null
+    related_gene: []
   };
   const [currentProtein, setCurrentProtein] = useState(initialProteinState);
   const [message, setMessage] = useState("");
@@ -20,7 +20,7 @@ const Protein = (props) => {
           id: response.data.id,
           name: response.data.name,
           sequence: response.data.sequence,
-          related_gene: response.data.gene
+          related_gene: response.data.related_gene
         }
         setCurrentProtein(data);
         console.log(response.data);
@@ -34,97 +34,38 @@ const Protein = (props) => {
     getProtein(props.match.params.id);
   }, [props.match.params.id]);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setCurrentProtein({ ...currentProtein, [name]: value });
-  };
-
-  const updateProtein = () => {
-    ProteinDataService.updateProtein(currentProtein.id, currentProtein)
-      .then((response) => {
-        console.log(response.data);
-        setMessage("The Protein was updated successfully");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  const deleteProtein = () => {
-    ProteinDataService.deleteProtein(currentProtein.id)
-      .then((response) => {
-        console.log(response.data);
-        props.history.push("/Proteins/");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
   return (
     <div>
       {currentProtein ? (
         <div className="edit-form">
-          <h4>Protein</h4>
+          <h4>Protein: {currentProtein.name}</h4>
+          <br/>
           <form>
             <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                name="name"
-                value={currentProtein.name}
-                onChange={handleInputChange}
-              />
+              <h5>Related Gene</h5>
+              <a href={"/genes/" + currentProtein.related_gene.id}>{currentProtein.related_gene.name}</a>
             </div>
             <div className="form-group">
-              <label htmlFor="sequence">Sequence</label>
-              <input
-                type="text"
-                className="form-control"
-                id="sequence"
-                name="sequence"
-                value={currentProtein.sequence}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="sequence">Gene</label>
-              <input
-                type="text"
-                className="form-control"
-                id="gene"
-                name="gene"
-                value={currentProtein.gene}
-                onChange={handleInputChange}
-              />
+              <h5>Sequence</h5>
+              {currentProtein.sequence}
             </div>
           </form>
 
-          <button className="badge badge-danger mr-2" onClick={deleteProtein}>
-            Delete
-          </button>
-
-          <button
-            type="submit"
-            className="badge badge-success"
-            onClick={updateProtein}>
-            Update
-          </button>
+          <Link
+            to={"/proteins/update/" + currentProtein.id}
+            className="badge badge-warning">
+            Edit
+          </Link>
           <p>{message}</p>
         </div>
       ) : (
         <div>
           <br />
-          <p>Please click on a Protein...</p>
+          <p>An Error has occurred...</p>
         </div>
       )}
-      <Link to={"/genes/create"} className="nav-link">
-        Add Gene
-      </Link>
     </div>
   );
 };
 
-export default Protein;
+export default ProteinView;

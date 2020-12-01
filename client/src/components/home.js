@@ -3,14 +3,14 @@ const home = () => {
       <div className="container content">
         <div className="row">
           <div className="col-sm-3 talk">
-            <h1>dnaDB</h1>
+            <h1>GeneStore</h1>
             <br />
             <br />
             <h6>
-              <a className="btn btn-dark start start-two" href="#">
+              <a className="btn btn-dark start start-two" href="/genes">
                 Genes
               </a>
-              <a className="btn btn-dark start start-two" href="#">
+              <a className="btn btn-dark start start-two" href="/proteins">
                 Proteins
               </a>
             </h6>

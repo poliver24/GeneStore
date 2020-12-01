@@ -71,54 +71,57 @@ const CreateGene = () => {
             </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                required
-                value={gene.name}
-                onChange={handleInputChange}
-                name="name"
-                ref={register({
-                  required: true,
-                })}
-                style={{
-                  ...styles.input,
-                  borderColor: errors.name && "red",
-                }}
-              />
-            </div>
+          <div>
+            <h3>New Gene</h3>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  required
+                  value={gene.name}
+                  onChange={handleInputChange}
+                  name="name"
+                  ref={register({
+                    required: true,
+                  })}
+                  style={{
+                    ...styles.input,
+                    borderColor: errors.name && "red",
+                  }}
+                />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="sequence">Sequence</label>
-              <input
-                type="text"
-                className="form-control"
-                id="sequence"
-                required
-                value={gene.sequence}
-                onChange={handleInputChange}
-                name="sequence"
-                ref={register({
-                  required: true,
-                  pattern: /[ATCG]/,
-                })}
-                style={{
-                  ...styles.input,
-                  borderColor: errors.sequence && "red",
-                }}
-              />
-              {errors.sequence &&
-                "Sequence can only contain characters A,T,C and G"}
-            </div>
+              <div className="form-group">
+                <label htmlFor="sequence">Sequence</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="sequence"
+                  required
+                  value={gene.sequence}
+                  onChange={handleInputChange}
+                  name="sequence"
+                  ref={register({
+                    required: true,
+                    pattern: /[ATCG]/,
+                  })}
+                  style={{
+                    ...styles.input,
+                    borderColor: errors.sequence && "red",
+                  }}
+                />
+                {errors.sequence &&
+                  "Sequence can only contain characters A,T,C and G"}
+              </div>
 
-            <button type="submit" className="btn btn-success">
-              Submit
-            </button>
-          </form>
+              <button type="submit" className="btn btn-success">
+                Submit
+              </button>
+            </form>
+          </div>
         )}
       </div>
     );

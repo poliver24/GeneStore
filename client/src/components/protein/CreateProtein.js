@@ -68,69 +68,72 @@ const CreateProtein = () => {
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              required
-              value={protein.name}
-              onChange={handleInputChange}
-              name="name"
-              ref={register({
-                required: true,
-              })}
-              style={{
-                ...styles.input,
-                borderColor: errors.name && "red",
-              }}
-            />
-          </div>
+        <div>
+          <h3>New Protein</h3>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                required
+                value={protein.name}
+                onChange={handleInputChange}
+                name="name"
+                ref={register({
+                  required: true,
+                })}
+                style={{
+                  ...styles.input,
+                  borderColor: errors.name && "red",
+                }}
+              />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="sequence">Sequence</label>
-            <input
-              type="text"
-              className="form-control"
-              id="sequence"
-              required
-              value={protein.sequence}
-              onChange={handleInputChange}
-              name="sequence"
-              ref={register({
-                required: true,
-                pattern: /[A-Z]/,
-              })}
-              style={{
-                ...styles.input,
-                borderColor: errors.sequence && "red",
-              }}
-            />
-            {errors.sequence && "Sequence can only contain letters"}
-          </div>
+            <div className="form-group">
+              <label htmlFor="sequence">Sequence</label>
+              <input
+                type="text"
+                className="form-control"
+                id="sequence"
+                required
+                value={protein.sequence}
+                onChange={handleInputChange}
+                name="sequence"
+                ref={register({
+                  required: true,
+                  pattern: /[A-Z]/,
+                })}
+                style={{
+                  ...styles.input,
+                  borderColor: errors.sequence && "red",
+                }}
+              />
+              {errors.sequence && "Sequence can only contain letters"}
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="gene">Gene</label>
-            <input
-              type="text"
-              className="form-control"
-              id="sequence"
-              required
-              value={protein.gene}
-              onChange={handleInputChange}
-              name="gene"
-              ref={register({
-                required: true,
-              })}
-            />
-          </div>
+            <div className="form-group">
+              <label htmlFor="gene">Gene</label>
+              <input
+                type="text"
+                className="form-control"
+                id="sequence"
+                required
+                value={protein.gene}
+                onChange={handleInputChange}
+                name="gene"
+                ref={register({
+                  required: true,
+                })}
+              />
+            </div>
 
-          <button type="submit" className="btn btn-success">
-            Submit
-          </button>
-        </form>
+            <button type="submit" className="btn btn-success">
+              Submit
+            </button>
+          </form>
+        </div>
       )}
     </div>
   );

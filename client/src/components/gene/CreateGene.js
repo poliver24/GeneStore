@@ -49,7 +49,7 @@ const CreateGene = () => {
         setSubmitted(false);
     };
 
-    function onSubmit(data) {
+    function onSubmit() {
       saveGene();
     }
 

@@ -1,5 +1,11 @@
 # GeneStore
 
+The Gene Storing Web App you never knew you needed!
+
+<strong>Frontend</strong> - https://genestoredb.netlify.app/
+
+<strong>Backend API</strong> - https://genestoredb.herokuapp.com/api/genes/
+
 ## Table of content
 
 - [Specification](#specification)

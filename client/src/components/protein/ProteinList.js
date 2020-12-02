@@ -46,6 +46,9 @@ const ProteinsList = () => {
                 </li>
               ))}
           </ul>
+          <Link to={"/proteins/create"} className="badge badge-success">
+            Add new Protein
+          </Link>
         </div>
         <div className="col-md-6">
           {currentProtein ? (

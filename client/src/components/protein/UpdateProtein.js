@@ -1,7 +1,6 @@
 //Update Gene View
 import React, { useState, useEffect } from "react";
 import ProteinDataService from "../../services/ProteinService";
-import { Link } from "react-router-dom";
 
 const UpdateProtein = (props) => { 
   const initialProteinState = {

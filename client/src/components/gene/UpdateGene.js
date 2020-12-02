@@ -1,7 +1,6 @@
 //Update Gene View
 import React, { useState, useEffect } from 'react';
 import GeneDataService from '../../services/GeneService';
-import { Link } from "react-router-dom";
 
 const UpdateGene = props => {
     const initialGeneState = {
@@ -10,7 +9,6 @@ const UpdateGene = props => {
         sequence: ""
     };
     const [currentGene, setCurrentGene] = useState(initialGeneState);
-    const [message, setMessage] = useState("");
 
     const getGene = id => {
         GeneDataService.getGene(id)
@@ -94,7 +92,6 @@ const UpdateGene = props => {
               onClick={updateGene}>
               Update
             </button>
-            <p>{message}</p>
           </div>
         ) : (
           <div>

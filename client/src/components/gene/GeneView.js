@@ -11,7 +11,6 @@ const GeneView = (props) => {
     sequence: "",
   };
   const [currentGene, setCurrentGene] = useState(initialGeneState);
-  const [message, setMessage] = useState("");
   const [proteins, setProteins] = useState([]);
 
   const getGene = (id) => {
@@ -40,11 +39,6 @@ const GeneView = (props) => {
   useEffect(() => {
     getGene(props.match.params.id);
   }, [props.match.params.id]);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setCurrentGene({ ...currentGene, [name]: value });
-  };
 
   return (
     <div>
@@ -77,7 +71,6 @@ const GeneView = (props) => {
             className="badge badge-warning">
             Edit
           </Link>
-          <p>{message}</p>
         </div>
       ) : (
         <div>

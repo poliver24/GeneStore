@@ -23,7 +23,7 @@ Protein:
 
 ## Approach 
 
-frontend, a view for a gene (where you can update it), a view for a protein (where you can update it), a view to create new gene, a view to create new proteins
+frontend, a view for a gene (where you can update it), a view for a protein (where you can update it), a view to create new gene, a view to create new protein
 
 ## Gene examples
 

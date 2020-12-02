@@ -1,38 +1,41 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Raleway');
+@import url('https://fonts.googleapis.com/css2?family=Lato');
+
+.navbar.navbar-expand {
+  background-color: black;
+  z-index: 1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.navbar.navbar-expand .navbar-brand {
   color: white;
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 30px;
+  padding: 0px 15px;
+  height: 60px;
+  letter-spacing: 4px;
+  line-height: 60px;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar.navbar-expand .nav-link {
+  color: white;
+  font-family: "Lato";
+  font-size: 17px;
+  padding: 0px 15px;
+  letter-spacing: 3px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar.navbar-expand .nav-link::after {
+   content: '';
+   display: block;
+   width: 0;
+   height: 2px;
+   background: rgb(144, 144, 243);
+   transition: width .3s
 }
+
+.navbar.navbar-expand .nav-link:hover::after {
+   width: 100%;
+   transition: width .3s
+}
+

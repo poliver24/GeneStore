@@ -16,19 +16,19 @@ import UpdateProtein from "./components/protein/UpdateProtein";
 function App() {
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <nav className="navbar navbar-expand">
         <a href="/" className="navbar-brand">
-          GeneStore
+          GENE STORE
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link to={"/genes"} className="nav-link">
-              Genes
+              GENES
             </Link>
           </li>
           <li className="nav-item">
             <Link to={"/proteins"} className="nav-link">
-              Proteins
+              PROTEINS
             </Link>
           </li>
         </div>

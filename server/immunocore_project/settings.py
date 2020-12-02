@@ -61,7 +61,7 @@ MIDDLEWARE = [
 ALLOWED_HOSTS=['localhost','127.0.0.1', 'genestoredb.herokuapp.com']
 
 CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000','127.0.0.1', 'https://zen-cori-ed7da3.netlify.app/']
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000','127.0.0.1', 'https://genestoredb.netlify.app/']
 
 ROOT_URLCONF = 'immunocore_project.urls'
 

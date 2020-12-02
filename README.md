@@ -19,6 +19,7 @@ Protein:
 - Django REST
 - React 
 - PostgreSQL
+- Heroku
 
 ## Approach 
 

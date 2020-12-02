@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-ALLOWED_HOSTS=['localhost','ancient-sands-68459.herokuapp.com']
+ALLOWED_HOSTS=['localhost','ancient-peak-14157.herokuapp.com']
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000']

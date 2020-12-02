@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-ALLOWED_HOSTS=['localhost','ancient-peak-14157.herokuapp.com']
+ALLOWED_HOSTS=['localhost','127.0.0.1', 'genestoredb.herokuapp.com']
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = ['http://localhost:3000']

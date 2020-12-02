@@ -5,8 +5,8 @@
 - [Specification](#specification)
 - [Models](#models)
 - [Tech Stack](#tech-stack)
-- [setup](#setup)
-- [Runn](#run)
+- [Setup Instructions](#setup)
+- [Run Instructions](#run)
 
 ## Specification
  - Full Stack Web Application

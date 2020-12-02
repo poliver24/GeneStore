@@ -1,5 +1,13 @@
 # GeneStore
 
+## Table of content
+
+- [Specification](#specification)
+- [Models](#models)
+- [Tech Stack](#tech-stack)
+- [setup](#setup)
+- [Runn](#run)
+
 ## Specification
  - Full Stack Web Application
  - Pythom Backend

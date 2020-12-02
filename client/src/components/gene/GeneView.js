@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import GeneDataService from "../../services/GeneService";
 import ProteinDataService from "../../services/ProteinService";
 import { Link } from "react-router-dom";
+import './GeneView.css'
 
 const GeneView = (props) => {
   const initialGeneState = {
@@ -62,7 +63,7 @@ const GeneView = (props) => {
 
             <div className="form-group">
               <h5>Sequence</h5>
-              {currentGene.sequence}
+              <div className="sequence">{currentGene.sequence}</div>
             </div>
           </form>
 

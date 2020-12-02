@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import ProteinDataService from "../../services/ProteinService";
 import { Link } from "react-router-dom";
 
+import './ProteinView.css'
+
 const ProteinView = (props) => {
   const initialProteinState = {
     id: null,
@@ -39,15 +41,17 @@ const ProteinView = (props) => {
       {currentProtein ? (
         <div className="edit-form">
           <h4>Protein: {currentProtein.name}</h4>
-          <br/>
+          <br />
           <form>
             <div className="form-group">
               <h5>Related Gene</h5>
-              <a href={"/genes/" + currentProtein.related_gene.id}>{currentProtein.related_gene.name}</a>
+              <a href={"/genes/" + currentProtein.related_gene.id}>
+                {currentProtein.related_gene.name}
+              </a>
             </div>
             <div className="form-group">
               <h5>Sequence</h5>
-              {currentProtein.sequence}
+              <div className="sequence">{currentProtein.sequence}</div>
             </div>
           </form>
 

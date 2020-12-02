@@ -1,55 +1,65 @@
-# Immunocore Tech Test
+# GeneStore
 
 ## Specification
+ - Full Stack Web Application
+ - Pythom Backend
+ - React Frontend
+ - SQL Database
+
+### User Story
 As a scientist I want to be able to view, and record genes, and their associated proteins. A gene can be associated with 0 or more proteins, it has a DNA sequence. A protein is always associated to a gene, and it has an aminoacid sequence and a name
 
 
 ## Models
-Gene:
-  name --> str (the name of the gene)
-  sequence -->  str (a sequence of A, T, C or G, those are the 4 nucleotides DNA is made of)
+- Gene:</br>
+  name --> str (the name of the gene)</br>
+  sequence -->  str (a sequence of A, T, C or G, those are the 4 nucleotides DNA is made of)</br>
 
-Protein:
-  Gene --> The gene that creates this protein
-  name --> str (the name of the protein)
-  sequence --> str (a sequence of letters, these should be aminoacids which have their own alphabet, but using any letter will suffice)
+- Protein:</br>
+  Gene --> The gene that creates this protein</br>
+  name --> str (the name of the protein)</br>
+  sequence --> str (a sequence of letters, these should be aminoacids which have their own alphabet, but using any letter will suffice)</br>
 
 
 ## Tech Stack 
 - Django REST
 - React 
 - PostgreSQL
+- Bootstrap
+- Axios
 - Heroku
-
-## Approach 
-
-frontend, a view for a gene (where you can update it), a view for a protein (where you can update it), a view to create new gene, a view to create new protein
-
-## Gene examples
-
-- Gene: <br>
-name --> TP53 <br>
-sequence: <br>
-CCACCTGAAGTCCAAAAAGGGTCAGTCTACCTCCCGCCATAAAAAACTCATGTTCAAGACAGAAGGGCCTGACTCAGACTGACATTCTCCACTTCTTGTTCCCACTGACAGCCTCCCACCCCCATCTCTCCCTCCCCTGCCATTTTGGGTTTTGGGTCTTTGAACCCTTGCTTGCAATAGGTGTGCGTCAGAAGCACCCAGGACTTCCATTTGCTTTCCCGGGGCTCCACTGAACAAGTTGGCCTGCACTGGTGTTTTGTTGTGGGGAGGAGGATGGGGAGTAGGACATACCAGCTTAGATTTTAAGGTTTTTACTGTGAGGGATGTTTGGGAGATGTAAGAAATGTTCTTGCAGTTAAGGGTTAGTTTACAATCAGCCACATTCTAGGTAGGGGCCCACTTCACCGTACTAACCAGGGAAGCTGTCCCTCACTGTTGAATTTTCTCTAACTTCAAGGCCCATATCTGTGAAATGCTGGCATTTGCACCTACCTCACAGAGTGCATTGTGAGGGTTAATGAAATAATGTACATCTGGCCTTGAAACCACCTTTTATTACATGGGGTCTAGAACTTGACCCCCTTGAGGGTGCTTGTTCCCTCTCCCTGTTGGTCGGTGGGTTGGTAGTTTCTACAGTTGGGCAGCTGGTTAGGTAGAGGGAGTTGTCAAGTCTCTGCTGGCCCAGCCAAACCCTGTCTGACAACCTCTTGGTGAACCTTAGTACCTAAAAGGAAATCTCACCCCATCCCACACCCTGGAGGATTTCATCTCTTGTATATGATGATCTGGATCCACCAAGACTTGTTTTATGCTCAGGGTCAATTTCTTTTTTCTTTTTTTTTTTTTTTTTTCTTTTTCTTTGAGACTGGGTCTCGCTTTGTTGCCCAGGCTGGAGTGGAGTGGCGTGATCTTGGCTTACTGCAGCCTTTGCCTCCCCGGCTCGAGCAGTCCTGCCTCAGCCTCCGGAGTAGCTGGGACCACAGGTTCATGCCACCATGGCCACCAACTTTTGCATGTTTTGTAGAGATGGGGTCTCACAGTGTTGCCCAGGCTGGTCTCAAACTCCTGGGCTCAGGCGATCCACCTGTCTCAGCCTCCCAGAGTGCTGGGATTACAATTGTGAGCCACCACGTCCAGCTGGAAGGGTCAACATCTTTTACATTCTGCAAGCACATCTGCATTTTCACCCCACCCTTCCCCTCCTTCTCCCTTTTTATATCCCATTTTTATATCGATCTCTTATTTTACAATAAAACTTTGCTGCCA
-
-- Protein: <br>
-Gene: TP53 (pointer to TP53 gene) <br>
-name: isoform G <br>
-sequence: <br>
-MDDLMLSPDDIEQWFTEDPGPDEAPRMPEAAPPVAPAPAAPTPAAPAPAPSWPLSSSVPSQKTYQGSYGFRLGFLHSGTAKSVTCTYSPALNKMFCQLAKTCPVLWVDSTPPPGTRVRAMAIYKQSQHMTEVVRRCPHHERCSDSDGLAPPQHLIRVEGNLRVEYLDDRNTFRHSVVVPYEPPEVGSDCTTIHYNYMCNSSCMGGMNRRPILTIITLEDSSGNLLGRNSFEVRVCACPGRDRRTEEENLRKKGEPHHELPPGSTKRALPNNTSSSPQPKKKPLDGEYFTLQIRGRERFEMFRELNEALELKDAQAGKEPGGSRAHSSHLKSKGQSTSRHKKLMFKTEGPDSD
-
-A more realistic Entry: https://www.ncbi.nlm.nih.gov/nuccore/NC_000012.12?strand=2&report=genbank&from=55954105&to=55973317
- where the CDS would be "equivalent" to proteins and the ORIGIN at the end would be the DNA sequence
+- Netlify
+- Github Actions
 
 ## SETUP
 
-### Database
+### Backend
 
-'psql'
-'CREATE DATABASE immunocore_db;'
-'\q'
+From the Root Project Directory
+- 'cd' into the 'Server' Folder.
+- run 'python3 -m venv genestore-env' to create a virtual python environment.
+- run 'source genestore-env/bin/activate' to activate the virtual environment.
+- run 'pip install -r requirements.txt'
+- run 'psql' to access postgres.
+- run 'CREATE DATABASE immunocore_db;' to create the required Database.
+- Exit postgres by running 'psql'.
+- run 'python manage.py migrate' to migrate the models to the database.
 
-### Secrets
-.env file
-Django secret key
-SECRET_KEY='[SECRET_KEY]'
+### Frontend
+
+From the Root Project Directory
+- 'cd' into the 'client' folder. 
+- run 'npm install' to install the required node modules. 
+
+## Run
+
+From the Root project Directory 
+- 'cd' into the 'Server folder'.
+- run 'python manage.py runserver' to start a development server.
+- 'cd' back to the root directory.
+- 'cd' into the 'client' folder.
+- run 'npm start' to start the development server 
+- In your browser navigate to 'https://localhost:3000' to interact with the frontend
+- In your browser navigate to 'https://localhost:8000/api' for the backend API
+
+
